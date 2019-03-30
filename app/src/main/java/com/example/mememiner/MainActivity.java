@@ -89,12 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
         int rand = random.nextInt();
 
-<<<<<<< HEAD
         Bitmap mem = getBase(rand%5);
-=======
-        doot = Grill.fryImage(doot, 10);
-        doot = Grill.widenImage(doot, 3,2);
->>>>>>> ddc19bf0e1a1bc55abc0e61dce8b5f53969b0b76
 
         mem = Grill.fryImage(mem, rand%30);
 
