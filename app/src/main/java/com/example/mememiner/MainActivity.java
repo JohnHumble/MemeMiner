@@ -42,16 +42,14 @@ public class MainActivity extends AppCompatActivity {
                 words.setText("Tee Hee :)");
 
                 // add a new meme element to collection
-                Meme next = new Meme();
+                Meme next = getMeme();
 
                 collection.add(next);
 
                 // load the skelitor as a bitmap
-                Bitmap doot = BitmapFactory.decodeResource(getResources(),R.mipmap.doot_foreground);
 
-                doot = Grill.fryImage(doot, 10);
 
-                imageView.setImageBitmap(doot);
+                imageView.setImageBitmap(collection.get(0).getImage());
 
               //  imageView.setImageResource(collection.get(0).image);
             }
@@ -68,7 +66,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private Bitmap getImage(){
+    private Meme getMeme(){
         //TODO put your logic here to get the image
+
+        Bitmap doot = BitmapFactory.decodeResource(getResources(),R.mipmap.doot_foreground);
+
+        doot = Grill.fryImage(doot, 10);
+
+        Meme next = new Meme(doot, "Doot","Doo Doot");
+
+
+
+        return next;
     }
 }

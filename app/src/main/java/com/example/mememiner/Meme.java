@@ -1,24 +1,27 @@
 package com.example.mememiner;
 
+import android.graphics.Bitmap;
 import android.media.Image;
 
 public class Meme {
-    protected String name, discription;
-    protected int image;
+    protected String m_name, m_discription;
+    protected Bitmap m_image;
 
-    public Meme(){
-        image = R.mipmap.doot_foreground;
+    public Meme(Bitmap image, String name, String discription){
+        m_image = image;
+        m_name = name;
+        m_discription = discription;
     }
 
-    public int getImage(){
-        return image;
+    public Bitmap getImage(){
+        return m_image;
     }
 
     public String getName() {
-        return name;
+        return m_name;
     }
 
     public String getDiscription() {
-        return discription;
+        return m_discription;
     }
 }
