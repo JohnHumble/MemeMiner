@@ -4,13 +4,13 @@ import android.media.Image;
 
 public class Meme {
     protected String name, discription;
-    protected Image image;
+    protected int image;
 
-    public Meme(int rarity){
-
+    public Meme(){
+        image = R.mipmap.doot_foreground;
     }
 
-    public Image getImage(){
+    public int getImage(){
         return image;
     }
 

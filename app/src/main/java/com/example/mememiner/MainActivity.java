@@ -39,9 +39,12 @@ public class MainActivity extends AppCompatActivity {
                 // Put logic here for when the bait button is pressed
                 words.setText("Tee Hee :)");
 
-                // draw the skeletor in the square
+                // add a new meme element to collection
+                Meme next = new Meme();
 
-                imageView.setImageResource(R.mipmap.doot_foreground);
+                collection.add(next);
+
+                imageView.setImageResource(collection.get(0).image);
             }
         });
 
