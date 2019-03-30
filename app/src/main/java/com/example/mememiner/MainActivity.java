@@ -12,6 +12,7 @@ import java.lang.reflect.Member;
 
 public class MainActivity extends AppCompatActivity {
 
+    // class member variables
     Button baitButton;
     TextView words;
 
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         baitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                // Put logic here for when the bait button is pressed
                 words.setText("Tee Hee :)");
             }
         });
