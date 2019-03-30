@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     // class member variables
-    Button baitButton;
+    Button baitButton, walletButton;
     TextView words;
     ImageView imageView;
 
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         baitButton = findViewById(R.id.bait_button);
+        walletButton = findViewById(R.id.view_collection);
         words = findViewById(R.id.words);
         imageView = findViewById(R.id.imageView);
 
@@ -56,6 +57,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        walletButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO display all of the content in the collection.
+            }
+        });
 
+
+
+    }
+
+    private Bitmap getImage(){
+        //TODO put your logic here to get the image
     }
 }
