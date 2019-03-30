@@ -43,6 +43,19 @@ public class Grill {
         canvas.drawBitmap(bmp, 0, 0, paint);
 
         return ret;
+
+
+    }
+     //distorts the image by widening/heightening
+    static Bitmap widenImage(Bitmap image, int amount1, int amount2){
+
+        Bitmap Image = image;
+
+        int width = amount1*Image.getWidth();
+        int height = amount2*Image.getHeight();
+        Image = Bitmap.createScaledBitmap(Image,width,height,false);
+
+        return Image;
     }
 
 }
