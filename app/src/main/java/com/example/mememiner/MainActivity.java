@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         Bitmap doot = BitmapFactory.decodeResource(getResources(),R.mipmap.doot_foreground);
 
         doot = Grill.fryImage(doot, 10);
+        doot = Grill.widenImage(doot, 3,2);
 
         Meme next = new Meme(doot, "Doot","Doo Doot");
 
