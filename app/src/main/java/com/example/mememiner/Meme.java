@@ -1,7 +1,9 @@
 package com.example.mememiner;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.Image;
+import android.widget.ImageView;
 
 public class Meme {
     protected String m_name, m_discription;

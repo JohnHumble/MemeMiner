@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -14,26 +15,34 @@ import org.w3c.dom.Text;
 import java.io.InputStream;
 import java.lang.reflect.Member;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
     // class member variables
     Button baitButton, walletButton;
     TextView words;
-    ImageView imageView;
+    RelativeLayout rl;
 
     ArrayList<Meme> collection;
+    ArrayList<ImageView> viewers;
+
+    Random random;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        rl = (RelativeLayout) findViewById(R.id.rl);
+
         baitButton = findViewById(R.id.bait_button);
         walletButton = findViewById(R.id.view_collection);
         words = findViewById(R.id.words);
-        imageView = findViewById(R.id.imageView);
 
+        random = new Random();
+
+        viewers = new ArrayList<>();
         collection = new ArrayList<>();
 
         baitButton.setOnClickListener(new View.OnClickListener() {
@@ -45,13 +54,9 @@ public class MainActivity extends AppCompatActivity {
                 Meme next = getMeme();
 
                 collection.add(next);
+                addViewer(next);
 
                 // load the skelitor as a bitmap
-
-
-                imageView.setImageBitmap(collection.get(0).getImage());
-
-              //  imageView.setImageResource(collection.get(0).image);
             }
         });
 
@@ -62,22 +67,54 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private void addViewer(Meme meme){
+        ImageView imageView = new ImageView(getApplicationContext());
+        imageView.setImageBitmap(meme.getImage());
 
+        // Create layout parameters for ImageView
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
+        // Add rule to layout parameters
+        // Add the ImageView below to Button
+        lp.addRule(RelativeLayout.BELOW, rl.getId());
+
+        rl.addView(imageView);
+
+        viewers.add(imageView);
     }
 
     private Meme getMeme(){
-        //TODO put your logic here to get the image
+        //TODO make this method give a variance of memes
 
-        Bitmap doot = BitmapFactory.decodeResource(getResources(),R.mipmap.doot_foreground);
+        int rand = random.nextInt();
 
-        doot = Grill.fryImage(doot, 10);
-        doot = Grill.widenImage(doot, 3,2);
+        Bitmap mem = getBase(rand%5);
 
-        Meme next = new Meme(doot, "Doot","Doo Doot");
+        mem = Grill.fryImage(mem, rand%30);
 
-
-
+        Meme next = new Meme(mem, "Rare","Meme");
         return next;
+    }
+
+    private Bitmap getBase(int choice){
+        switch (choice){
+            case 0:
+                return BitmapFactory.decodeResource(getResources(),R.mipmap.doge_forground);
+
+            case 1:
+                return BitmapFactory.decodeResource(getResources(),R.mipmap.chungus_foreground);
+
+            case 2:
+                return BitmapFactory.decodeResource(getResources(),R.mipmap.chonkdog_foreground);
+
+            case 3:
+                return BitmapFactory.decodeResource(getResources(),R.mipmap.chonkcat_foreground);
+
+            case 4:
+
+            default:
+                return BitmapFactory.decodeResource(getResources(),R.mipmap.doot_foreground);
+        }
     }
 }
