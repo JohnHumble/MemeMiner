@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.io.InputStream;
 import java.lang.reflect.Member;
 import java.util.ArrayList;
 
@@ -44,7 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
                 collection.add(next);
 
-                imageView.setImageResource(collection.get(0).image);
+                // load the skelitor as a bitmap
+                Bitmap doot = BitmapFactory.decodeResource(getResources(),R.mipmap.doot_foreground);
+
+                doot = Grill.fryImage(doot, 10);
+
+                imageView.setImageBitmap(doot);
+
+              //  imageView.setImageResource(collection.get(0).image);
             }
         });
 
