@@ -16,7 +16,7 @@ public class Grill {
 
     static Bitmap fryImage(Bitmap image, int amount){
 
-        float contrast = 3f;
+        float contrast = amount * 0.1f;
         float brightness = 0.01f;
         Bitmap fried = changeBitmapContrastBrightness(image,contrast,brightness);
         //fried.setDensity(1f);
