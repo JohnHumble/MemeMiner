@@ -60,9 +60,6 @@ public class MainActivity extends AppCompatActivity {
                 Meme next = getMeme();
 
                 adapter.add(next);
-               // addViewer(next);
-
-                // load the skelitor as a bitmap
             }
         });
 
@@ -89,15 +86,15 @@ public class MainActivity extends AppCompatActivity {
 
         viewers.add(imageView);
     }
-    final int MAX = 1000;
+    final int MAX = 1024;
     private Meme getMeme(){
         //TODO make this method give a variance of memes
 
-        int rand = random.nextInt();
+        int rand = random.nextInt(MAX);
 
-        Bitmap mem = getBase(rand%MAX);
+        Bitmap mem = getBase(rand);
 
-        mem = Grill.fryImage(mem, rand%30);
+        mem = Grill.fryImage(mem, 10);
 
         Meme next = new Meme(mem, "Rare","Meme");
         return next;
@@ -110,24 +107,24 @@ public class MainActivity extends AppCompatActivity {
             return BitmapFactory.decodeResource(getResources(),R.mipmap.chonkcat_foreground);
         }
 
-        if (choice < MAX / 64) {
+        if (choice < MAX / 32) {
             return BitmapFactory.decodeResource(getResources(),R.mipmap.chonkdog_foreground);
         }
 
-        if (choice < MAX / 32) {
+        if (choice < MAX / 16) {
             return BitmapFactory.decodeResource(getResources(),R.mipmap.yee_foreground);
         }
 
 
-        if (choice < MAX / 16){
+        if (choice < MAX / 8){
             return BitmapFactory.decodeResource(getResources(),R.mipmap.chungus_foreground);
         }
 
-        if (choice < MAX / 8){
+        if (choice < MAX / 4){
             return BitmapFactory.decodeResource(getResources(),R.mipmap.pa_foreground);
         }
 
-        if (choice < MAX / 4){
+        if (choice < MAX / 2){
             return BitmapFactory.decodeResource(getResources(),R.mipmap.doge_forground);
         }
 
