@@ -94,7 +94,10 @@ public class MainActivity extends AppCompatActivity {
 
         Bitmap mem = getBase(rand);
 
-        mem = Grill.fryImage(mem, 10);
+        int ranfry = random.nextInt(MAX);
+        if (ranfry < MAX/2) {
+            mem = Grill.fryImage(mem, Math.max(10, ranfry % 20), this);
+        }
 
         Meme next = new Meme(mem, "Rare","Meme");
         return next;
