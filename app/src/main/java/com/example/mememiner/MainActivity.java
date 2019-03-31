@@ -2,11 +2,14 @@ package com.example.mememiner;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.ImageDecoder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,10 +25,10 @@ public class MainActivity extends AppCompatActivity {
     // class member variables
     Button baitButton, walletButton;
     TextView words;
-    RelativeLayout rl;
+    ListView memeView;
 
     ArrayList<Meme> collection;
-    ArrayList<ImageView> viewers;
+    MemeAdapter adapter;
 
     Random random;
 
@@ -34,7 +37,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rl = (RelativeLayout) findViewById(R.id.rl);
+        memeView = (ListView) findViewById(R.id.list_view_id);
+
+        collection = new ArrayList<>();
+        adapter = new MemeAdapter(this,collection);
 
         baitButton = findViewById(R.id.bait_button);
         walletButton = findViewById(R.id.view_collection);
@@ -42,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
         random = new Random();
 
-        viewers = new ArrayList<>();
-        collection = new ArrayList<>();
+        memeView.setAdapter(adapter);
+
 
         baitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -53,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
                 // add a new meme element to collection
                 Meme next = getMeme();
 
-                collection.add(next);
-                addViewer(next);
+                adapter.add(next);
+               // addViewer(next);
 
                 // load the skelitor as a bitmap
             }
@@ -68,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    private void addViewer(Meme meme){
+    private void addViewer(Meme meme, ArrayList<ImageView> viewers){
         ImageView imageView = new ImageView(getApplicationContext());
         imageView.setImageBitmap(meme.getImage());
 
@@ -77,19 +83,19 @@ public class MainActivity extends AppCompatActivity {
 
         // Add rule to layout parameters
         // Add the ImageView below to Button
-        lp.addRule(RelativeLayout.BELOW, rl.getId());
+       // lp.addRule(RelativeLayout.BELOW, rl.getId());
 
-        rl.addView(imageView);
+        //rl.addView(imageView);
 
         viewers.add(imageView);
     }
-
+    final int MAX = 1000;
     private Meme getMeme(){
         //TODO make this method give a variance of memes
 
         int rand = random.nextInt();
 
-        Bitmap mem = getBase(rand%5);
+        Bitmap mem = getBase(rand%MAX);
 
         mem = Grill.fryImage(mem, rand%30);
 
@@ -98,23 +104,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Bitmap getBase(int choice){
-        switch (choice){
-            case 0:
-                return BitmapFactory.decodeResource(getResources(),R.mipmap.doge_forground);
 
-            case 1:
-                return BitmapFactory.decodeResource(getResources(),R.mipmap.chungus_foreground);
 
-            case 2:
-                return BitmapFactory.decodeResource(getResources(),R.mipmap.chonkdog_foreground);
-
-            case 3:
-                return BitmapFactory.decodeResource(getResources(),R.mipmap.chonkcat_foreground);
-
-            case 4:
-
-            default:
-                return BitmapFactory.decodeResource(getResources(),R.mipmap.doot_foreground);
+        if (choice < MAX / 128){
+            return BitmapFactory.decodeResource(getResources(),R.mipmap.chonkcat_foreground);
         }
+
+        if (choice < MAX / 64) {
+            return BitmapFactory.decodeResource(getResources(),R.mipmap.chonkdog_foreground);
+        }
+
+        if (choice < MAX / 32) {
+            return BitmapFactory.decodeResource(getResources(),R.mipmap.yee_foreground);
+        }
+
+
+        if (choice < MAX / 16){
+            return BitmapFactory.decodeResource(getResources(),R.mipmap.chungus_foreground);
+        }
+
+        if (choice < MAX / 8){
+            return BitmapFactory.decodeResource(getResources(),R.mipmap.pa_foreground);
+        }
+
+        if (choice < MAX / 4){
+            return BitmapFactory.decodeResource(getResources(),R.mipmap.doge_forground);
+        }
+
+        return BitmapFactory.decodeResource(getResources(),R.mipmap.doot_foreground);
     }
 }
